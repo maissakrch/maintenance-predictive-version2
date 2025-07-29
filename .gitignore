@@ -1,0 +1,35 @@
+# Fichiers systèmes / OS
+.DS_Store
+Thumbs.db
+
+# Environnements virtuels
+venv/
+.venv/
+
+# Fichiers Python temporaires
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Checkpoints Jupyter
+.ipynb_checkpoints/
+
+# Fichiers modèles / gros fichiers
+*.pkl
+*.h5
+*.joblib
+
+# Résultats temporaires
+*.csv
+results.csv
+rapport_projet.pdf
+
+# Fichiers de logs
+*.log
+
+# Configuration IDE
+.vscode/
+.idea/
+
+# Autres fichiers sensibles ou inutiles
+.env
