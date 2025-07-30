@@ -1,4 +1,6 @@
 import dash
+import pages.visualisation  # en haut avec les autres
+
 from dash import dcc, html
 import dash_bootstrap_components as dbc
 import dash_pages.predict as predict_page
