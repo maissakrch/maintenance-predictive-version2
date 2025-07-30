@@ -1,8 +1,13 @@
 # interface_dash/pages/visualisation.py
+import dash
 from dash import html, dcc, Input, Output, State, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
+
+dash.register_page(__name__, path="/visualisation", name="Visualisation des données")
+
+
 
 layout = dbc.Container([
     html.H2("📊 Visualisation des données", className="mt-4"),
