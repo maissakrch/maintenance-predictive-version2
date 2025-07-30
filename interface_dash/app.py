@@ -4,7 +4,6 @@ import dash
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 
-# Initialisation de l'app avec gestion automatique des pages
 app = dash.Dash(
     __name__,
     use_pages=True,
@@ -14,20 +13,18 @@ app = dash.Dash(
 
 server = app.server
 
-# Layout principal
 app.layout = dbc.Container([
     html.H1("🛠️ Interface Maintenance Prédictive", className="mt-4"),
-    
+
     dbc.Nav([
         dbc.NavLink("🏠 Accueil", href="/", active="exact"),
         dbc.NavLink("📊 Visualisation des données", href="/visualisation", active="exact"),
         dbc.NavLink("🔍 Prédiction", href="/predict", active="exact"),
-        # Ajoute ici d'autres NavLink plus tard
+        dbc.NavLink("📈 Comparaison des modèles", href="/comparison", active="exact"),
     ], pills=True, className="mb-4"),
 
     dash.page_container
 ], fluid=True)
 
-# Exécution
 if __name__ == '__main__':
     app.run(debug=True)
