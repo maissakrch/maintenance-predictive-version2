@@ -21,6 +21,7 @@ app.layout = dbc.Container([
         dbc.NavLink("📊 Visualisation des données", href="/visualisation", active="exact"),
         dbc.NavLink("🔍 Prédiction", href="/predict", active="exact"),
         dbc.NavLink("📈 Comparaison des modèles", href="/comparison", active="exact"),
+        dbc.NavLink("🧠 Explicabilité SHAP", href="/shap", active="exact"),
     ], pills=True, className="mb-4"),
 
     dash.page_container
