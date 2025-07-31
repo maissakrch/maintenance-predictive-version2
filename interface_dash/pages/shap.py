@@ -2,28 +2,33 @@
 
 import dash
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 
-dash.register_page(__name__, path="/shap", name="Explicabilité SHAP")
+dash.register_page(__name__, path="/shap", name="Explicabilité (SHAP)")
 
-# Lecture des fichiers SHAP
-shap_values = pd.read_csv("results/shap_values.csv")
-feature_names = pd.read_csv("results/feature_names.csv")
+def layout():
+    try:
+        df = pd.read_csv("../results/shap_values.csv")
+        feature_names = pd.read_csv("../results/feature_names.csv").columns.tolist()
 
-# Moyenne absolue des valeurs SHAP par feature
-shap_values_mean = shap_values.abs().mean().values
-feature_names_list = feature_names.columns.tolist()
-df_shap = pd.DataFrame({
-    "Feature": feature_names_list,
-    "Importance": shap_values_mean
-}).sort_values(by="Importance", ascending=False)
+        df_mean = df.abs().mean().sort_values(ascending=False)
+        fig = px.bar(
+            x=df_mean.values[:10],
+            y=df_mean.index[:10],
+            orientation='h',
+            labels={'x': 'Valeur moyenne SHAP', 'y': 'Feature'},
+            title="Top 10 des variables influentes (SHAP)"
+        )
+        fig.update_layout(yaxis=dict(autorange="reversed"))
 
-fig = px.bar(df_shap, x="Importance", y="Feature", orientation="h", title="Importance des variables (SHAP)")
-
-layout = html.Div([
-    html.H2("🧠 Explicabilité du modèle - SHAP"),
-    html.P("Visualisation de l’impact de chaque capteur sur les prédictions du modèle."),
-    dcc.Graph(figure=fig)
-])
+        return html.Div([
+            html.H2("🧠 Explicabilité avec SHAP"),
+            dcc.Graph(figure=fig)
+        ])
+    except Exception as e:
+        return html.Div([
+            html.H2("🧠 Explicabilité avec SHAP"),
+            html.P(f"Erreur : {e}"),
+            html.P("Assure-toi que les fichiers SHAP ont bien été générés.")
+        ])
